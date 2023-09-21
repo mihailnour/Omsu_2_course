@@ -1,53 +1,108 @@
-package com.src.nour;
-
-import java.util.Arrays;
 import java.util.Scanner;
 
-public class main {
-    private static final Scanner sc = new Scanner(System.in);
-
-    public static void printArray(int[] array) {
-        for (int element : array) {
-            System.out.println(element);
-        }
-    }
-
-    public static int[] inputArray(int size) {
-        int[] array = new int[size];
-        for (int i = 0; i < size; i++) {
-            array[i] = sc.nextInt();
-        }
-        return array;
-    }
-
-    public static int sumElements(int[] array) {
-        return Arrays.stream(array).sum();
-    }
-
-    public static long getCountOfEven(int[] array) {
-        return Arrays.stream(array).filter(x -> x % 2 == 0).count();
-    }
-
-    public static long getCountOfRanged(int l, int r, int[] array) {
-        return Arrays.stream(array).filter(x -> x <= r && x >= l).count();
-    }
-
-    public static boolean isPositiveArray(int[] array) {
-        return Arrays.stream(array).allMatch(x -> x > 0);
-    }
-
-    public static void reverseArray(int[] array) {
-        int temp;
-        for (int i = 0; i < array.length / 2; i++) {
-            temp = array[i];
-            array[i] = array[array.length - i - 1];
-            array[array.length - i - 1] = temp;
-        }
-    }
+public class Main{
 
     public static void main(String[] args) {
-        int[] array = {1, 2, 4, 5};
-        reverseArray(array);
-        System.out.println(Arrays.toString(array));
+        System.out.println("Enter the size of array:");
+        Scanner in = new Scanner(System.in);
+        int Size = in.nextInt();
+
+        int arr[] = new int[Size];
+
+        PrintArray(arr);
+        RewriteArray(arr);
+        PrintArray(arr);
+        System.out.println("Sum of array: " + ArraySum(arr));
+        System.out.println("Quantity of even numbers: " + ArrayEven(arr));
+        System.out.println("Is positive? Answer: " + IsPositive(arr));
+        System.out.println("Enter a");
+        double a = in.nextDouble();
+        System.out.println("Enter b");
+        double b = in.nextDouble();
+        System.out.println("Quantity of numbers between " + a + " and " + b + " :" + ArraySegment(arr, a, b));
+        ReverseArray(arr);
+        PrintArray(arr);
+    }
+
+    public static void PrintArray(int[] Array) {
+
+        for (int Elem : Array) {
+            System.out.print(Elem + " ");
+        }
+        System.out.print('\n');
+    }
+
+    public static void RewriteArray(int[] Array) {
+
+        Scanner in = new Scanner(System.in);
+
+        for (int i = 0; i < Array.length; i++) {
+            System.out.println("Enter the element with index " + i);
+            Array[i] = in.nextInt();
+        }
+    }
+
+    public static int ArraySum(int[] Array) {
+
+        int Sum = 0;
+        for (int Elem : Array) {
+            Sum += Elem;
+        }
+        return Sum;
+    }
+
+    public static int ArrayEven(int[] Array) {
+
+        int Count = 0;
+        for (int Elem : Array) {
+            if (Elem % 2 == 0) {
+                Count++;
+            }
+        }
+        return Count;
+    }
+
+    public static int ArraySegment(int[] Array, double a, double b) {
+
+        int Count = 0;
+
+        if (a > b) {
+            double tmp = a;
+            a = b;
+            b = tmp;
+        }
+
+        for (int Elem : Array) {
+            if ((Elem >= a) && (Elem <= b)) {
+                Count++;
+            }
+        }
+
+        return Count;
+    }
+
+    public static boolean IsPositive(int[] Array) {
+
+        boolean Pos = true;
+
+        for (int Elem : Array) {
+            if (Elem < 0) Pos = false;
+        }
+
+        return Pos;
+    }
+
+    public static void ReverseArray(int[] Array) {
+
+        int left = 0, right = Array.length - 1;
+        int tmp;
+
+        while (left < right) {
+            tmp = Array[left];
+            Array[left] = Array[right];
+            Array[right] = tmp;
+            left++;
+            right--;
+        }
     }
 }

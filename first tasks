@@ -1,3 +1,5 @@
+package com.src.nour;
+
 public class firstblockex {
     public static double[] fourthTask(double a, double b, double c) throws IllegalArgumentException {
         double det = b * b - 4 * a * c;

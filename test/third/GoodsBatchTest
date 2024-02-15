@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Test;
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
+
 class GoodsBatchTest {
 
     @Test
@@ -27,9 +31,9 @@ class GoodsBatchTest {
         PackagedPieceProduct packagedPieceProduct2 = new PackagedPieceProduct(packaging2, pieceProduct2, 5);
         PackagedPieceProduct packagedPieceProduct3 = new PackagedPieceProduct(packaging3, pieceProduct3, 5);
 
-        List<PackagedProduct> packagedProducts1 = List.of(packagedWeightedProduct1, packagedPieceProduct1);
-        List<PackagedProduct> packagedProducts2 = List.of(packagedWeightedProduct2, packagedPieceProduct2);
-        List<PackagedProduct> packagedProducts3 = List.of(packagedWeightedProduct3, packagedPieceProduct3);
+        List<ProductPackaging> packagedProducts1 = List.of(packagedWeightedProduct1, packagedPieceProduct1);
+        List<ProductPackaging> packagedProducts2 = List.of(packagedWeightedProduct2, packagedPieceProduct2);
+        List<ProductPackaging> packagedProducts3 = List.of(packagedWeightedProduct3, packagedPieceProduct3);
 
         GoodsBatch goodsBatch1 = new GoodsBatch("Batch1", packagedProducts1);
         GoodsBatch goodsBatch2 = new GoodsBatch("Batch1", packagedProducts2);
@@ -50,10 +54,48 @@ class GoodsBatchTest {
         WeightedProduct weightedProduct2 = new WeightedProduct("Product2", "Description2", 3.0);
 
         PackagedWeightedProduct packagedWeightedProduct1 = new PackagedWeightedProduct(packaging1, weightedProduct1, 1.0);
-        PackagedWeightedProduct packagedWeightedProduct2 = new PackagedWeightedProduct(packaging
+        PackagedWeightedProduct packagedWeightedProduct2 = new PackagedWeightedProduct(packaging2, weightedProduct2, 1.0);
 
+        PieceProduct pieceProduct1 = new PieceProduct("Product3", "Description3", 0.1);
+        PieceProduct pieceProduct2 = new PieceProduct("Product4", "Description4", 0.2);
 
+        PackagedPieceProduct packagedPieceProduct1 = new PackagedPieceProduct(packaging1, pieceProduct1, 5);
+        PackagedPieceProduct packagedPieceProduct2 = new PackagedPieceProduct(packaging2, pieceProduct2, 3);
 
-There was an error generating a response
+        List<ProductPackaging> packagedProducts = List.of(packagedWeightedProduct1, packagedPieceProduct1, packagedWeightedProduct2, packagedPieceProduct2);
 
-Regenerate
+        GoodsBatch goodsBatch = new GoodsBatch("Mixed Batch", packagedProducts);
+
+        assertEquals(14.5, goodsBatch.getTotalWeight());
+    }
+
+    @Test
+    void testGoodsBatchToString() {
+        Packaging packaging1 = new Packaging("Packaging1", 0.5);
+        Packaging packaging2 = new Packaging("Packaging2", 1.0);
+
+        WeightedProduct weightedProduct1 = new WeightedProduct("Product1", "Description1", 2.0);
+        WeightedProduct weightedProduct2 = new WeightedProduct("Product2", "Description2", 3.0);
+
+        PackagedWeightedProduct packagedWeightedProduct1 = new PackagedWeightedProduct(packaging1, weightedProduct1, 1.0);
+        PackagedWeightedProduct packagedWeightedProduct2 = new PackagedWeightedProduct(packaging2, weightedProduct2, 1.0);
+
+        PieceProduct pieceProduct1 = new PieceProduct("Product3", "Description3", 0.1);
+        PieceProduct pieceProduct2 = new PieceProduct("Product4", "Description4", 0.2);
+
+        PackagedPieceProduct packagedPieceProduct1 = new PackagedPieceProduct(packaging1, pieceProduct1, 5);
+        PackagedPieceProduct packagedPieceProduct2 = new PackagedPieceProduct(packaging2, pieceProduct2, 3);
+
+        List<ProductPackaging> packagedProducts = List.of(packagedWeightedProduct1, packagedPieceProduct1, packagedWeightedProduct2, packagedPieceProduct2);
+
+        GoodsBatch goodsBatch = new GoodsBatch("Mixed Batch", packagedProducts);
+
+        String expectedString = "GoodsBatch{description='Mixed Batch', packagedProducts=[" +
+                "PackagedWeightedProduct{weightedProduct=WeightedProduct{name='Product1', description='Description1', weight=2.0}, netWeight=1.0, Packaging{name='Packaging1', weight=0.5}}, " +
+                "PackagedPieceProduct{pieceProduct=PieceProduct{name='Product3', description='Description3', weightPerPiece=0.1}, quantity=5, Packaging{name='Packaging1', weight=0.5}}, " +
+                "PackagedWeightedProduct{weightedProduct=WeightedProduct{name='Product2', description='Description2', weight=3.0}, netWeight=1.0, Packaging{name='Packaging2', weight=1.0}}, " +
+                "PackagedPieceProduct{pieceProduct=PieceProduct{name='Product4', description='Description4', weightPerPiece=0.2}, quantity=3, Packaging{name='Packaging2', weight=1.0}}]}";
+
+        assertEquals(expectedString, goodsBatch.toString());
+    }
+}

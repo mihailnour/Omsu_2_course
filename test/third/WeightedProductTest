@@ -1,0 +1,25 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class WeightedProductTest {
+
+    @Test
+    void testWeightedProductEqualsAndHashCode() {
+        WeightedProduct weightedProduct1 = new WeightedProduct("Product1", "Description1", 2.0);
+        WeightedProduct weightedProduct2 = new WeightedProduct("Product1", "Description1", 2.0);
+        WeightedProduct weightedProduct3 = new WeightedProduct("Product2", "Description2", 3.0);
+
+        assertEquals(weightedProduct1, weightedProduct2);
+        assertNotEquals(weightedProduct1, weightedProduct3);
+        assertEquals(weightedProduct1.hashCode(), weightedProduct2.hashCode());
+        assertNotEquals(weightedProduct1.hashCode(), weightedProduct3.hashCode());
+    }
+
+    @Test
+    void testWeightedProductToString() {
+        WeightedProduct weightedProduct = new WeightedProduct("Product1", "Description1", 2.0);
+        String expectedString = "WeightedProduct{name='Product1', description='Description1', weight=2.0}";
+
+        assertEquals(expectedString, weightedProduct.toString());
+    }
+}

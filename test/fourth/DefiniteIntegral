@@ -1,0 +1,26 @@
+public class DefiniteIntegral implements Functional<RealFunction> {
+    private double lowerLimit;
+    private double upperLimit;
+
+    public DefiniteIntegral(double lowerLimit, double upperLimit) {
+        this.lowerLimit = lowerLimit;
+        this.upperLimit = upperLimit;
+    }
+
+    @Override
+    public double calculateValue(RealFunction function) {
+        if (lowerLimit < function.getLowerBound() || upperLimit > function.getUpperBound()) {
+            throw new IllegalArgumentException("Integration limits are outside the function's domain");
+        }
+
+        // Using the rectangle method for simplicity, you might want to use a more accurate method in practice
+        double step = 0.0001; // Adjust the step size according to your needs
+        double result = 0;
+
+        for (double x = lowerLimit; x < upperLimit; x += step) {
+            result += function.calculate(x) * step;
+        }
+
+        return result;
+    }
+}

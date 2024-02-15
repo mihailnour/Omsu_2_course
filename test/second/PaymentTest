@@ -1,0 +1,29 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class PaymentTest {
+    @Test
+    void testEquals() {
+        Payment payment1 = new Payment("Anton Shaitan", 1, 2, 2024, 50000);
+        Payment payment2 = new Payment("Anton Shaitan", 1, 2, 2024, 50000);
+        Payment payment3 = new Payment("Nikita Kurilenko", 15, 3, 2024, 75000);
+
+        assertEquals(payment1, payment2);
+        assertNotEquals(payment1, payment3);
+    }
+    @Test
+    void testHashCode() {
+        Payment payment1 = new Payment("Anton Shaitan", 1, 2, 2024, 50000);
+        Payment payment2 = new Payment("Anton Shaitan", 1, 2, 2024, 50000);
+        Payment payment3 = new Payment("Nikita Kurilenko", 15, 3, 2024, 75000);
+
+        assertEquals(payment1.hashCode(), payment2.hashCode());
+        assertNotEquals(payment1.hashCode(), payment3.hashCode());
+    }
+    @Test
+    void testToString() {
+        Payment payment = new Payment("Anton Shaitan", 1, 2, 2024, 50000);
+        String expectedString = "Payment{fullName='John Doe', day=1, month=2, year=2024, amountInKopecks=50000}";
+        assertEquals(expectedString, payment.toString());
+    }
+}

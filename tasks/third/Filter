@@ -1,4 +1,3 @@
-// Интерфейс "Фильтр"
 interface Filter {
     boolean apply(String str);
 }

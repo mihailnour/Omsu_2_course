@@ -1,0 +1,22 @@
+import java.util.List;
+
+public class GoodsService {
+    public int countByFilter(GoodsBatch goodsBatch, Filter filter) {
+        int count = 0;
+        for (ProductPackaging packagedProduct : goodsBatch.getPackagedProducts()) {
+            // Если товар - набор, проверяем его название
+            if (packagedProduct instanceof PackagedProductSet) {
+                PackagedProductSet productSet = (PackagedProductSet) packagedProduct;
+                if (filter.apply(productSet.getName())) {
+                    count++;
+                }
+            }
+            else {
+                Product product = ((SingleProductPackaging) packagedProduct).getProduct();
+                if (filter.apply(product.getName())) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }

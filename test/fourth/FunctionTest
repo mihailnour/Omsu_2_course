@@ -1,0 +1,57 @@
+import com.example.*;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class FunctionTest {
+
+    @Test
+    void testLinearFunction() {
+        RealFunction linearFunction = new LinearFunction(2, 3, 1, 5);
+        assertEquals(5, linearFunction.calculate(1));
+        assertEquals(13, linearFunction.calculate(4));
+        assertEquals(1, linearFunction.getLowerBound());
+        assertEquals(5, linearFunction.getUpperBound());
+    }
+
+    @Test
+    void testSinusoidalFunction() {
+        RealFunction sinusoidalFunction = new SinusoidalFunction(1, 0.5, 0, Math.PI);
+        assertEquals(0, sinusoidalFunction.calculate(0));
+        assertEquals(1, sinusoidalFunction.calculate(Math.PI / 2));
+        assertEquals(-1, sinusoidalFunction.calculate(Math.PI));
+        assertEquals(0, sinusoidalFunction.getLowerBound());
+        assertEquals(Math.PI, sinusoidalFunction.getUpperBound());
+    }
+
+    @Test
+    void testRationalFunction() {
+        RealFunction rationalFunction = new RationalFunction(1, 2, 3, 4, 0, 5);
+        assertEquals(0.1, rationalFunction.calculate(1));
+        assertEquals(0.8, rationalFunction.calculate(2));
+        assertEquals(0, rationalFunction.getLowerBound());
+        assertEquals(5, rationalFunction.getUpperBound());
+    }
+
+    @Test
+    void testExponentialFunction() {
+        RealFunction exponentialFunction = new ExponentialFunction(2, 3, 0, 4);
+        assertEquals(20, exponentialFunction.calculate(1));
+        assertEquals(8, exponentialFunction.calculate(0));
+        assertEquals(0, exponentialFunction.getLowerBound());
+        assertEquals(4, exponentialFunction.getUpperBound());
+    }
+
+    @Test
+    void testSumFunctionValues() {
+        RealFunction linearFunction = new LinearFunction(2, 3, 1, 5);
+        Functional<RealFunction> sumFunctionValues = new SumFunctionValues();
+        assertEquals(24, sumFunctionValues.calculateValue(linearFunction));
+    }
+
+    @Test
+    void testDefiniteIntegral() {
+        RealFunction exponentialFunction = new ExponentialFunction(2, 3, 0, 4);
+        Functional<RealFunction> definiteIntegral = new DefiniteIntegral(0, 4);
+        assertEquals(117.709, definiteIntegral.calculateValue(exponentialFunction), 0.001);
+    }
+}

@@ -1,0 +1,13 @@
+public abstract class PackagedProduct {
+    private Packaging packaging;
+
+    public PackagedProduct(Packaging packaging) {
+        this.packaging = packaging;
+    }
+
+    public Packaging getPackaging() {
+        return packaging;
+    }
+
+    public abstract double getGrossWeight();
+}

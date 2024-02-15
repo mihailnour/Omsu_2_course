@@ -1,39 +1,43 @@
-public class PackagedWeightedProduct {
-    private Packaging packaging;
+public class PackagedWeightedProduct extends PackagedProduct {
     private WeightedProduct weightedProduct;
     private double netWeight;
 
     public PackagedWeightedProduct(Packaging packaging, WeightedProduct weightedProduct, double netWeight) {
-        this.packaging = packaging;
+        super(packaging);
         this.weightedProduct = weightedProduct;
         this.netWeight = netWeight;
     }
 
+    @Override
     public double getGrossWeight() {
-        return netWeight + packaging.getWeight();
+        return netWeight + getPackaging().getWeight();
+    }
+
+    public WeightedProduct getWeightedProduct() {
+        return weightedProduct;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         PackagedWeightedProduct that = (PackagedWeightedProduct) o;
         return Double.compare(that.netWeight, netWeight) == 0 &&
-                Objects.equals(packaging, that.packaging) &&
-                Objects.equals(weightedProduct, that.weightedProduct);
+                weightedProduct.equals(that.weightedProduct);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(packaging, weightedProduct, netWeight);
+        return Objects.hash(super.hashCode(), weightedProduct, netWeight);
     }
 
     @Override
     public String toString() {
         return "PackagedWeightedProduct{" +
-                "packaging=" + packaging +
-                ", weightedProduct=" + weightedProduct +
+                "weightedProduct=" + weightedProduct +
                 ", netWeight=" + netWeight +
+                ", " + super.toString() +
                 '}';
     }
 }

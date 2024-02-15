@@ -1,0 +1,59 @@
+import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
+
+class GoodsBatchTest {
+
+    @Test
+    void testGoodsBatchEqualsAndHashCode() {
+        Packaging packaging1 = new Packaging("Packaging1", 0.5);
+        Packaging packaging2 = new Packaging("Packaging1", 0.5);
+        Packaging packaging3 = new Packaging("Packaging2", 1.0);
+
+        WeightedProduct weightedProduct1 = new WeightedProduct("Product1", "Description1", 2.0);
+        WeightedProduct weightedProduct2 = new WeightedProduct("Product1", "Description1", 2.0);
+        WeightedProduct weightedProduct3 = new WeightedProduct("Product2", "Description2", 3.0);
+
+        PackagedWeightedProduct packagedWeightedProduct1 = new PackagedWeightedProduct(packaging1, weightedProduct1, 1.0);
+        PackagedWeightedProduct packagedWeightedProduct2 = new PackagedWeightedProduct(packaging2, weightedProduct2, 1.0);
+        PackagedWeightedProduct packagedWeightedProduct3 = new PackagedWeightedProduct(packaging3, weightedProduct3, 1.0);
+
+        PieceProduct pieceProduct1 = new PieceProduct("Product1", "Description1", 0.1);
+        PieceProduct pieceProduct2 = new PieceProduct("Product1", "Description1", 0.1);
+        PieceProduct pieceProduct3 = new PieceProduct("Product2", "Description2", 0.2);
+
+        PackagedPieceProduct packagedPieceProduct1 = new PackagedPieceProduct(packaging1, pieceProduct1, 5);
+        PackagedPieceProduct packagedPieceProduct2 = new PackagedPieceProduct(packaging2, pieceProduct2, 5);
+        PackagedPieceProduct packagedPieceProduct3 = new PackagedPieceProduct(packaging3, pieceProduct3, 5);
+
+        List<PackagedProduct> packagedProducts1 = List.of(packagedWeightedProduct1, packagedPieceProduct1);
+        List<PackagedProduct> packagedProducts2 = List.of(packagedWeightedProduct2, packagedPieceProduct2);
+        List<PackagedProduct> packagedProducts3 = List.of(packagedWeightedProduct3, packagedPieceProduct3);
+
+        GoodsBatch goodsBatch1 = new GoodsBatch("Batch1", packagedProducts1);
+        GoodsBatch goodsBatch2 = new GoodsBatch("Batch1", packagedProducts2);
+        GoodsBatch goodsBatch3 = new GoodsBatch("Batch2", packagedProducts3);
+
+        assertEquals(goodsBatch1, goodsBatch2);
+        assertNotEquals(goodsBatch1, goodsBatch3);
+        assertEquals(goodsBatch1.hashCode(), goodsBatch2.hashCode());
+        assertNotEquals(goodsBatch1.hashCode(), goodsBatch3.hashCode());
+    }
+
+    @Test
+    void testGoodsBatchTotalWeight() {
+        Packaging packaging1 = new Packaging("Packaging1", 0.5);
+        Packaging packaging2 = new Packaging("Packaging2", 1.0);
+
+        WeightedProduct weightedProduct1 = new WeightedProduct("Product1", "Description1", 2.0);
+        WeightedProduct weightedProduct2 = new WeightedProduct("Product2", "Description2", 3.0);
+
+        PackagedWeightedProduct packagedWeightedProduct1 = new PackagedWeightedProduct(packaging1, weightedProduct1, 1.0);
+        PackagedWeightedProduct packagedWeightedProduct2 = new PackagedWeightedProduct(packaging
+
+
+
+There was an error generating a response
+
+Regenerate

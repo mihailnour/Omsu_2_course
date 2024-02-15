@@ -1,39 +1,47 @@
-public class PackagedPieceProduct {
-    private Packaging packaging;
+public class PackagedPieceProduct extends PackagedProduct {
     private PieceProduct pieceProduct;
     private int quantity;
 
     public PackagedPieceProduct(Packaging packaging, PieceProduct pieceProduct, int quantity) {
-        this.packaging = packaging;
+        super(packaging);
         this.pieceProduct = pieceProduct;
         this.quantity = quantity;
     }
 
+    @Override
     public double getGrossWeight() {
-        return pieceProduct.getWeightPerPiece() * quantity + packaging.getWeight();
+        return pieceProduct.getWeightPerPiece() * quantity + getPackaging().getWeight();
+    }
+
+    public PieceProduct getPieceProduct() {
+        return pieceProduct;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         PackagedPieceProduct that = (PackagedPieceProduct) o;
         return quantity == that.quantity &&
-                Objects.equals(packaging, that.packaging) &&
-                Objects.equals(pieceProduct, that.pieceProduct);
+                pieceProduct.equals(that.pieceProduct);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(packaging, pieceProduct, quantity);
+        return Objects.hash(super.hashCode(), pieceProduct, quantity);
     }
 
     @Override
     public String toString() {
         return "PackagedPieceProduct{" +
-                "packaging=" + packaging +
-                ", pieceProduct=" + pieceProduct +
+                "pieceProduct=" + pieceProduct +
                 ", quantity=" + quantity +
+                ", " + super.toString() +
                 '}';
     }
 }

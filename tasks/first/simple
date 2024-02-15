@@ -1,4 +1,3 @@
-package com.src.nour;
 
 public class firstblockex {
     public static double[] fourthTask(double a, double b, double c) throws IllegalArgumentException {

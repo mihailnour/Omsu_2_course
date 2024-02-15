@@ -1,0 +1,5 @@
+public class NoRealRootsException extends Exception {
+    public NoRealRootsException(String message) {
+        super(message);
+    }
+}

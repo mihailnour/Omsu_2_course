@@ -1,0 +1,36 @@
+public class RationalFunction implements RealFunction {
+    private double A;
+    private double B;
+    private double C;
+    private double D;
+    private double lowerBound;
+    private double upperBound;
+
+    public RationalFunction(double A, double B, double C, double D, double lowerBound, double upperBound) {
+        this.A = A;
+        this.B = B;
+        this.C = C;
+        this.D = D;
+        this.lowerBound = lowerBound;
+        this.upperBound = upperBound;
+
+        if (C == 0 && D == 0) {
+            throw new IllegalArgumentException("Denominator cannot be zero");
+        }
+    }
+
+    @Override
+    public double calculate(double x) {
+        return (A * x + B) / (C * x + D);
+    }
+
+    @Override
+    public double getLowerBound() {
+        return lowerBound;
+    }
+
+    @Override
+    public double getUpperBound() {
+        return upperBound;
+    }
+}

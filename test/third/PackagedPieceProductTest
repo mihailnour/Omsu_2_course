@@ -1,0 +1,35 @@
+class PackagedPieceProductTest {
+
+    @Test
+    void testPackagedPieceProductEqualsAndHashCode() {
+        Packaging packaging1 = new Packaging("Packaging1", 0.5);
+        Packaging packaging2 = new Packaging("Packaging1", 0.5);
+        Packaging packaging3 = new Packaging("Packaging2", 1.0);
+
+        PieceProduct pieceProduct1 = new PieceProduct("Product1", "Description1", 0.1);
+        PieceProduct pieceProduct2 = new PieceProduct("Product1", "Description1", 0.1);
+        PieceProduct pieceProduct3 = new PieceProduct("Product2", "Description2", 0.2);
+
+        PackagedPieceProduct packagedPieceProduct1 = new PackagedPieceProduct(packaging1, pieceProduct1, 5);
+        PackagedPieceProduct packagedPieceProduct2 = new PackagedPieceProduct(packaging2, pieceProduct2, 5);
+        PackagedPieceProduct packagedPieceProduct3 = new PackagedPieceProduct(packaging3, pieceProduct3, 5);
+
+        assertEquals(packagedPieceProduct1, packagedPieceProduct2);
+        assertNotEquals(packagedPieceProduct1, packagedPieceProduct3);
+        assertEquals(packagedPieceProduct1.hashCode(), packagedPieceProduct2.hashCode());
+        assertNotEquals(packagedPieceProduct1.hashCode(), packagedPieceProduct3.hashCode());
+    }
+
+    @Test
+    void testPackagedPieceProductToString() {
+        Packaging packaging = new Packaging("Packaging1", 0.5);
+        PieceProduct pieceProduct = new PieceProduct("Product1", "Description1", 0.1);
+
+        PackagedPieceProduct packagedPieceProduct = new PackagedPieceProduct(packaging, pieceProduct, 5);
+        String expectedString = "PackagedPieceProduct{packaging=Packaging{name='Packaging1', weight=0.5}, " +
+                "pieceProduct=PieceProduct{name='Product1', description='Description1', weightPerPiece=0.1}, " +
+                "quantity=5}";
+
+        assertEquals(expectedString, packagedPieceProduct.toString());
+    }
+}

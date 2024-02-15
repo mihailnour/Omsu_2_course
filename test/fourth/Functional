@@ -1,0 +1,3 @@
+public interface Functional<T extends RealFunction> {
+    double calculateValue(T function);
+}

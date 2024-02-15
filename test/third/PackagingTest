@@ -1,0 +1,25 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class PackagingTest {
+
+    @Test
+    void testPackagingEqualsAndHashCode() {
+        Packaging packaging1 = new Packaging("Packaging1", 0.5);
+        Packaging packaging2 = new Packaging("Packaging1", 0.5);
+        Packaging packaging3 = new Packaging("Packaging2", 1.0);
+
+        assertEquals(packaging1, packaging2);
+        assertNotEquals(packaging1, packaging3);
+        assertEquals(packaging1.hashCode(), packaging2.hashCode());
+        assertNotEquals(packaging1.hashCode(), packaging3.hashCode());
+    }
+
+    @Test
+    void testPackagingToString() {
+        Packaging packaging = new Packaging("Packaging1", 0.5);
+        String expectedString = "Packaging{name='Packaging1', weight=0.5}";
+
+        assertEquals(expectedString, packaging.toString());
+    }
+}

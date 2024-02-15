@@ -1,0 +1,28 @@
+public class LinearFunction implements RealFunction {
+    private double A;
+    private double B;
+    private double lowerBound;
+    private double upperBound;
+
+    public LinearFunction(double A, double B, double lowerBound, double upperBound) {
+        this.A = A;
+        this.B = B;
+        this.lowerBound = lowerBound;
+        this.upperBound = upperBound;
+    }
+
+    @Override
+    public double calculate(double x) {
+        return A * x + B;
+    }
+
+    @Override
+    public double getLowerBound() {
+        return lowerBound;
+    }
+
+    @Override
+    public double getUpperBound() {
+        return upperBound;
+    }
+}

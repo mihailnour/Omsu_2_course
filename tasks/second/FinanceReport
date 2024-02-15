@@ -1,0 +1,40 @@
+import java.util.Arrays;
+
+public class FinanceReport {
+    private Payment[] payments;
+    private String authorFullName;
+    private String creationDate;
+    
+    public FinanceReport(Payment[] payments, String authorFullName, String creationDate) {
+        this.payments = Arrays.copyOf(payments, payments.length);
+        this.authorFullName = authorFullName;
+        this.creationDate = creationDate;
+    }
+    public FinanceReport(FinanceReport other) {
+        this.payments = Arrays.copyOf(other.payments, other.payments.length);
+        this.authorFullName = other.authorFullName;
+        this.creationDate = other.creationDate;
+    }
+    public int getNumberOfPayments() {
+        return payments.length;
+    }
+    public Payment getPayment(int index) {
+        return payments[index];
+    }
+    public void setPayment(int index, Payment payment) {
+        payments[index] = payment;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder(String.format("[Автор: %s, дата: %s, Платежи: [", authorFullName, creationDate));
+        for (Payment payment : payments) {
+            result.append(String.format("Плательщик: %s, дата: %d.%d.%d, сумма: %d руб. %02d коп.%n",
+                    payment.getFullName(), payment.getDay(), payment.getMonth(), payment.getYear(),
+                    payment.getAmountInKopecks() / 100, payment.getAmountInKopecks() % 100));
+        }
+
+        result.append("]]");
+        return result.toString();
+    }
+}

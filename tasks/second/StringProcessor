@@ -1,0 +1,28 @@
+public class StringProcessor {
+    public static String repeatString(String s, int N) {
+        if (N < 0) {
+            throw new IllegalArgumentException("N должно быть неотрицательным числом");
+        }
+        return s.repeat(N);
+    }
+    public static int countOccurrences(String mainString, String searchString) {
+        if (searchString == null || searchString.isEmpty()) {
+            throw new IllegalArgumentException("Вторая строка не может быть null или пустой");
+        }
+        int count = 0;
+        int lastIndex = 0;
+        while ((lastIndex = mainString.indexOf(searchString, lastIndex)) != -1) {
+            count++;
+            lastIndex += searchString.length();
+        }
+        return count;
+    }
+    public static String replaceDigitsWithWords(String input) {
+        return input.replace("1", "один").replace("2", "два").replace("3", "три");
+    }
+    public static void removeEverySecondCharacter(StringBuilder input) {
+        for (int i = 1; i < input.length(); i += 2) {
+            input.deleteCharAt(i);
+        }
+    }
+

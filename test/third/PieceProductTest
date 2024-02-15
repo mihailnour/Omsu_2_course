@@ -1,0 +1,25 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class PieceProductTest {
+
+    @Test
+    void testPieceProductEqualsAndHashCode() {
+        PieceProduct pieceProduct1 = new PieceProduct("Product1", "Description1", 0.1);
+        PieceProduct pieceProduct2 = new PieceProduct("Product1", "Description1", 0.1);
+        PieceProduct pieceProduct3 = new PieceProduct("Product2", "Description2", 0.2);
+
+        assertEquals(pieceProduct1, pieceProduct2);
+        assertNotEquals(pieceProduct1, pieceProduct3);
+        assertEquals(pieceProduct1.hashCode(), pieceProduct2.hashCode());
+        assertNotEquals(pieceProduct1.hashCode(), pieceProduct3.hashCode());
+    }
+
+    @Test
+    void testPieceProductToString() {
+        PieceProduct pieceProduct = new PieceProduct("Product1", "Description1", 0.1);
+        String expectedString = "PieceProduct{name='Product1', description='Description1', weightPerPiece=0.1}";
+
+        assertEquals(expectedString, pieceProduct.toString());
+    }
+}

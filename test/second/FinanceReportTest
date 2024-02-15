@@ -1,0 +1,39 @@
+import org.junit.jupiter.api.Test;
+import java.util.Date;
+import static org.junit.jupiter.api.Assertions.*;
+
+class FinanceReportTest {
+
+    @Test
+    void testFinanceReportConstructor() {
+        Date currentDate = new Date();
+        Payment[] payments = new Payment[]{
+                new Payment("John Doe", 1, 2, 2024, 50000),
+                new Payment("Jane Smith", 15, 3, 2024, 75000)
+        };
+
+        FinanceReport financeReport = new FinanceReport(payments, "John Doe", currentDate);
+
+        assertArrayEquals(payments, financeReport.getPayments());
+        assertEquals("John Doe", financeReport.getAuthorFullName());
+        assertEquals(currentDate, financeReport.getReportCreationDate());
+    }
+
+    @Test
+    void testFinanceReportToString() {
+        Date currentDate = new Date();
+        Payment[] payments = new Payment[]{
+                new Payment("John Doe", 1, 2, 2024, 50000),
+                new Payment("Jane Smith", 15, 3, 2024, 75000)
+        };
+
+        FinanceReport financeReport = new FinanceReport(payments, "John Doe", currentDate);
+
+        String expectedString = String.format("[Автор: John Doe, дата: %s, Платежи: [\n" +
+                "Плательщик: John Doe, дата: 1.2.2024 сумма: 500 руб. 0 коп.\n" +
+                "Плательщик: Jane Smith, дата: 15.3.2024 сумма: 750 руб. 0 коп.\n]]",
+                currentDate.toString());
+
+        assertEquals(expectedString, financeReport.toString());
+    }
+}

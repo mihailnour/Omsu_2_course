@@ -1,0 +1,19 @@
+package com.example;
+
+public class LargestRootFinder {
+    private QuadraticEquationSolver equationSolver;
+
+    public LargestRootFinder(QuadraticEquationSolver equationSolver) {
+        this.equationSolver = equationSolver;
+    }
+
+    public double findLargestRoot(double a, double b, double c) throws NoRealRootsException {
+        double[] roots = equationSolver.solve(a, b, c);
+
+        if (roots.length == 0) {
+            throw new NoRealRootsException("No real roots found.");
+        }
+
+        return Math.max(roots[0], roots.length > 1 ? roots[1] : Double.NEGATIVE_INFINITY);
+    }
+}

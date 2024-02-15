@@ -1,0 +1,35 @@
+public class WeightedProduct extends Product {
+    private double weight;
+
+    public WeightedProduct(String name, String description, double weight) {
+        super(name, description);
+        this.weight = weight;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        WeightedProduct that = (WeightedProduct) o;
+        return Double.compare(that.weight, weight) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), weight);
+    }
+
+    @Override
+    public String toString() {
+        return "WeightedProduct{" +
+                "name='" + getName() + '\'' +
+                ", description='" + getDescription() + '\'' +
+                ", weight=" + weight +
+                '}';
+    }
+}

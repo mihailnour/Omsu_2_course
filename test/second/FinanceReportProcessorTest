@@ -1,0 +1,48 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class FinanceReportProcessorTest {
+
+    @Test
+    void testGetPaymentsByLastName() {
+        Date currentDate = new Date();
+        Payment[] payments = new Payment[]{
+                new Payment("John Doe", 1, 2, 2024, 50000),
+                new Payment("Jane Smith", 15, 3, 2024, 75000),
+                new Payment("Bob Johnson", 20, 4, 2024, 100000)
+        };
+
+        FinanceReport financeReport = new FinanceReport(payments, "John Doe", currentDate);
+
+        FinanceReport result = FinanceReportProcessor.getPaymentsByLastName(financeReport, 'J');
+
+        Payment[] expectedPayments = new Payment[]{
+                new Payment("John Doe", 1, 2, 2024, 50000),
+                new Payment("Jane Smith", 15, 3, 2024, 75000),
+                new Payment("Bob Johnson", 20, 4, 2024, 100000)
+        };
+
+        assertArrayEquals(expectedPayments, result.getPayments());
+    }
+
+    @Test
+    void testGetPaymentsLessThanAmount() {
+        Date currentDate = new Date();
+        Payment[] payments = new Payment[]{
+                new Payment("John Doe", 1, 2, 2024, 50000),
+                new Payment("Jane Smith", 15, 3, 2024, 75000),
+                new Payment("Bob Johnson", 20, 4, 2024, 100000)
+        };
+
+        FinanceReport financeReport = new FinanceReport(payments, "John Doe", currentDate);
+
+        FinanceReport result = FinanceReportProcessor.getPaymentsLessThanAmount(financeReport, 80000);
+
+        Payment[] expectedPayments = new Payment[]{
+                new Payment("John Doe", 1, 2, 2024, 50000),
+                new Payment("Jane Smith", 15, 3, 2024, 75000)
+        };
+
+        assertArrayEquals(expectedPayments, result.getPayments());
+    }
+}

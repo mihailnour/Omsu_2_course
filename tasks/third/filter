@@ -1,0 +1,45 @@
+// Интерфейс "Фильтр"
+interface Filter {
+    boolean apply(String str);
+}
+
+// Реализация "BeginStringFilter"
+class BeginStringFilter implements Filter {
+    private final String pattern;
+
+    public BeginStringFilter(String pattern) {
+        this.pattern = pattern;
+    }
+
+    @Override
+    public boolean apply(String str) {
+        return str.startsWith(pattern);
+    }
+}
+
+// Дополнительные реализации "Фильтр"
+class LengthFilter implements Filter {
+    private final int maxLength;
+
+    public LengthFilter(int maxLength) {
+        this.maxLength = maxLength;
+    }
+
+    @Override
+    public boolean apply(String str) {
+        return str.length() <= maxLength;
+    }
+}
+
+class ContainsSubstringFilter implements Filter {
+    private final String substring;
+
+    public ContainsSubstringFilter(String substring) {
+        this.substring = substring;
+    }
+
+    @Override
+    public boolean apply(String str) {
+        return str.contains(substring);
+    }
+}

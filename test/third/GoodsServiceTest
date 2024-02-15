@@ -1,0 +1,27 @@
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class GoodsServiceTest {
+    @Test
+    void testCountByFilter() {
+        Packaging packaging = new Packaging("Box", 1.0);
+        WeightedProduct weightedProduct = new WeightedProduct("Apple", "Fresh apple", 0.2);
+        PackagedWeightedProduct packagedWeightedProduct = new PackagedWeightedProduct(packaging, weightedProduct, 2.0);
+        PieceProduct pieceProduct = new PieceProduct("Chocolate", "Sweet chocolate", 0.1);
+        PackagedPieceProduct packagedPieceProduct = new PackagedPieceProduct(packaging, pieceProduct, 5);
+        ProductSet productSet = new ProductSet("Gift Set", List.of(packagedWeightedProduct, packagedPieceProduct));
+        PackagedProductSet packagedProductSet = new PackagedProductSet(packaging, productSet);
+        GoodsBatch goodsBatch = new GoodsBatch("Batch1", List.of(packagedProductSet));
+        GoodsService goodsService = new GoodsService();
+        Filter filterA = new BeginStringFilter("A");
+        // Создаем фильтр для товаров, начинающихся с "C"
+        Filter filterC = new BeginStringFilter("C");
+        int countA = goodsService.countByFilter(goodsBatch, filterA);
+        int countC = goodsService.countByFilter(goodsBatch, filterC);
+        assertEquals(1, countA);
+        assertEquals(0, countC);
+    }
+}

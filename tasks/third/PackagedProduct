@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.Objects;
+
 public abstract class PackagedProduct {
     private Packaging packaging;
 
@@ -10,4 +13,24 @@ public abstract class PackagedProduct {
     }
 
     public abstract double getGrossWeight();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PackagedProduct that = (PackagedProduct) o;
+        return packaging.equals(that.packaging);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(packaging);
+    }
+
+    @Override
+    public String toString() {
+        return "PackagedProduct{" +
+                "packaging=" + packaging +
+                '}';
+    }
 }

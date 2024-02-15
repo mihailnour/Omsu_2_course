@@ -1,0 +1,62 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class Vector3DTest {
+
+    @Test
+    void testPoint3D() {
+        Point3D point1 = new Point3D(1, 2, 3);
+        Point3D point2 = new Point3D(1, 2, 3);
+        Point3D point3 = new Point3D();
+        assertEquals(point1, point2);
+        assertNotEquals(point1, point3);
+        assertEquals(point3, new Point3D());
+    }
+
+    @Test
+    void testVector3D() {
+        Vector3D vector1 = new Vector3D(1, 2, 3);
+        Vector3D vector2 = new Vector3D(1, 2, 3);
+        Vector3D vector3 = new Vector3D();
+        assertEquals(vector1, vector2);
+        assertNotEquals(vector1, vector3);
+        assertEquals(vector3, new Vector3D());
+    }
+
+    @Test
+    void testVector3DProcessor() {
+        Vector3D vector1 = new Vector3D(1, 2, 3);
+        Vector3D vector2 = new Vector3D(4, 5, 6);
+        Vector3D sum = Vector3DProcessor.add(vector1, vector2);
+        assertEquals(new Vector3D(5, 7, 9), sum);
+        Vector3D difference = Vector3DProcessor.subtract(vector1, vector2);
+        assertEquals(new Vector3D(-3, -3, -3), difference);
+        double dotProduct = Vector3DProcessor.dotProduct(vector1, vector2);
+        assertEquals(32, dotProduct);
+        Vector3D crossProduct = Vector3DProcessor.crossProduct(vector1, vector2);
+        assertEquals(new Vector3D(-3, 6, -3), crossProduct);
+        assertTrue(Vector3DProcessor.areCollinear(vector1, new Vector3D(2, 4, 6)));
+        assertFalse(Vector3DProcessor.areCollinear(vector1, vector2));
+    }
+
+    @Test
+    void testVector3DArray() {
+        Vector3DArray vectorArray = new Vector3DArray(3);
+        assertEquals(3, vectorArray.length());
+        Vector3D newVector = new Vector3D(1, 1, 1);
+        vectorArray.setVector(1, newVector);
+        assertEquals(newVector, vectorArray.sumVectors());
+        assertEquals(1.732, vectorArray.maxVectorLength(), 0.001);
+        assertEquals(1, vectorArray.findVector(newVector));
+        Vector3D sum = vectorArray.sumVectors();
+        assertEquals(newVector, sum);
+        double[] coefficients = {1, 2, 3};
+        Vector3D linearCombination = vectorArray.linearCombination(coefficients);
+        assertEquals(new Vector3D(6, 7, 8), linearCombination);
+        Point3D startPoint = new Point3D(1, 1, 1);
+        Point3D[] shiftedPoints = vectorArray.shiftPoint(startPoint);
+        assertEquals(new Point3D(1, 1, 1), shiftedPoints[0]);
+        assertEquals(new Point3D(2, 2, 2), shiftedPoints[1]);
+        assertEquals(new Point3D(4, 4, 4), shiftedPoints[2]);
+    }
+}

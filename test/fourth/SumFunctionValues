@@ -1,0 +1,10 @@
+public class SumFunctionValues implements Functional<RealFunction> {
+    @Override
+    public double calculateValue(RealFunction function) {
+        double lowerBoundValue = function.calculate(function.getLowerBound());
+        double upperBoundValue = function.calculate(function.getUpperBound());
+        double middleValue = function.calculate((function.getLowerBound() + function.getUpperBound()) / 2);
+
+        return lowerBoundValue + upperBoundValue + middleValue;
+    }
+}

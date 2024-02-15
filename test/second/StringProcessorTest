@@ -1,0 +1,38 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class StringProcessorTest {
+
+    @Test
+    void testRepeatString() {
+        assertEquals("abcabcabc", StringProcessor.repeatString("abc", 3));
+        assertEquals("", StringProcessor.repeatString("abc", 0));
+        assertThrows(IllegalArgumentException.class, () -> StringProcessor.repeatString("abc", -1));
+    }
+
+    @Test
+    void testCountOccurrences() {
+        assertEquals(3, StringProcessor.countOccurrences("abababab", "ab"));
+        assertEquals(0, StringProcessor.countOccurrences("abc", "xyz"));
+        assertThrows(IllegalArgumentException.class, () -> StringProcessor.countOccurrences("abc", null));
+        assertThrows(IllegalArgumentException.class, () -> StringProcessor.countOccurrences("abc", ""));
+    }
+
+    @Test
+    void testReplaceDigitsWithWords() {
+        assertEquals("один два три", StringProcessor.replaceDigitsWithWords("123"));
+        assertEquals("один", StringProcessor.replaceDigitsWithWords("1"));
+        assertEquals("abc", StringProcessor.replaceDigitsWithWords("abc"));
+    }
+
+    @Test
+    void testRemoveEverySecondCharacter() {
+        StringBuilder sb = new StringBuilder("abcdefg");
+        StringProcessor.removeEverySecondCharacter(sb);
+        assertEquals("aceg", sb.toString());
+
+        StringBuilder emptyStringBuilder = new StringBuilder();
+        StringProcessor.removeEverySecondCharacter(emptyStringBuilder);
+        assertEquals("", emptyStringBuilder.toString());
+    }
+}

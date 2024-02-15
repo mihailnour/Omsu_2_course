@@ -1,0 +1,37 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class PackagedWeightedProductTest {
+
+    @Test
+    void testPackagedWeightedProductEqualsAndHashCode() {
+        Packaging packaging1 = new Packaging("Packaging1", 0.5);
+        Packaging packaging2 = new Packaging("Packaging1", 0.5);
+        Packaging packaging3 = new Packaging("Packaging2", 1.0);
+
+        WeightedProduct weightedProduct1 = new WeightedProduct("Product1", "Description1", 2.0);
+        WeightedProduct weightedProduct2 = new WeightedProduct("Product1", "Description1", 2.0);
+        WeightedProduct weightedProduct3 = new WeightedProduct("Product2", "Description2", 3.0);
+
+        PackagedWeightedProduct packagedWeightedProduct1 = new PackagedWeightedProduct(packaging1, weightedProduct1, 1.0);
+        PackagedWeightedProduct packagedWeightedProduct2 = new PackagedWeightedProduct(packaging2, weightedProduct2, 1.0);
+        PackagedWeightedProduct packagedWeightedProduct3 = new PackagedWeightedProduct(packaging3, weightedProduct3, 1.0);
+
+        assertEquals(packagedWeightedProduct1, packagedWeightedProduct2);
+        assertNotEquals(packagedWeightedProduct1, packagedWeightedProduct3);
+        assertEquals(packagedWeightedProduct1.hashCode(), packagedWeightedProduct2.hashCode());
+        assertNotEquals(packagedWeightedProduct1.hashCode(), packagedWeightedProduct3.hashCode());
+    }
+
+    @Test
+    void testPackagedWeightedProductToString() {
+        Packaging packaging = new Packaging("Packaging1", 0.5);
+        WeightedProduct weightedProduct = new WeightedProduct("Product1", "Description1", 2.0);
+
+        PackagedWeightedProduct packagedWeightedProduct = new PackagedWeightedProduct(packaging, weightedProduct, 1.0);
+        String expectedString = "PackagedWeightedProduct{packaging=Packaging{name='Packaging1', weight=0.5}, " +
+                "weightedProduct=WeightedProduct{name='Product1', description='Description1', weight=2.0}, netWeight=1.0}";
+
+        assertEquals(expectedString, packagedWeightedProduct.toString());
+    }
+}

@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PackagedWeightedProductTest {
@@ -29,8 +31,9 @@ class PackagedWeightedProductTest {
         WeightedProduct weightedProduct = new WeightedProduct("Product1", "Description1", 2.0);
 
         PackagedWeightedProduct packagedWeightedProduct = new PackagedWeightedProduct(packaging, weightedProduct, 1.0);
-        String expectedString = "PackagedWeightedProduct{packaging=Packaging{name='Packaging1', weight=0.5}, " +
-                "weightedProduct=WeightedProduct{name='Product1', description='Description1', weight=2.0}, netWeight=1.0}";
+        String expectedString = "PackagedWeightedProduct{weightedProduct=WeightedProduct{name='Product1', " +
+                "description='Description1', weight=2.0}, netWeight=1.0, " +
+                "PackagedProduct{packaging=Packaging{name='Packaging1', weight=0.5}}}";
 
         assertEquals(expectedString, packagedWeightedProduct.toString());
     }

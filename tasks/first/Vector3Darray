@@ -1,0 +1,67 @@
+import java.util.Arrays;
+
+class Vector3DArray {
+    private Vector3D[] vectors;
+    public Vector3DArray(int size) {
+        vectors = new Vector3D[size];
+        for (int i = 0; i < size; i++) {
+            vectors[i] = new Vector3D();
+        }
+    }
+    public int length() {
+        return vectors.length;
+    }
+    public void setVector(int index, Vector3D vector) {
+        vectors[index] = vector;
+    }
+    public double maxVectorLength() {
+        double maxLength = 0;
+        for (Vector3D vector : vectors) {
+            double length = vector.length();
+            if (length > maxLength) {
+                maxLength = length;
+            }
+        }
+        return maxLength;
+    }
+    public int findVector(Vector3D targetVector) {
+        for (int i = 0; i < vectors.length; i++) {
+            if (vectors[i].equals(targetVector)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    public Vector3D sumVectors() {
+        Vector3D sum = new Vector3D();
+        for (Vector3D vector : vectors) {
+            sum = Vector3DProcessor.add(sum, vector);
+        }
+        return sum;
+    }
+    public Vector3D linearCombination(double[] coefficients) {
+        if (coefficients.length != vectors.length) {
+            throw new IllegalArgumentException("Длины массивов векторов и коэффициентов не совпадают");
+        }
+
+        Vector3D result = new Vector3D();
+        for (int i = 0; i < vectors.length; i++) {
+            result = Vector3DProcessor.add(result, Vector3DProcessor.scalarMultiply(vectors[i], coefficients[i]));
+        }
+        return result;
+    }
+    public Point3D[] shiftPoint(Point3D P) {
+        Point3D[] shiftedPoints = new Point3D[vectors.length];
+        for (int i = 0; i < vectors.length; i++) {
+            double newX = P.getX() + vectors[i].getX();
+            double newY = P.getY() + vectors[i].getY();
+            double newZ = P.getZ() + vectors[i].getZ();
+            shiftedPoints[i] = new Point3D(newX, newY, newZ);
+        }
+        return shiftedPoints;
+    }
+    @Override
+    public String toString() {
+        return Arrays.toString(vectors);
+    }
+}

@@ -11,7 +11,7 @@ public class DefiniteIntegral implements Functional<RealFunction> {
         if (lowerLimit < function.getLowerBound() || upperLimit > function.getUpperBound()) {
             throw new IllegalArgumentException("Integration limits are outside the function's domain");
         }
-        double step = 0.0001; // Adjust the step size according to your needs
+        double step = 0.0001;
         double result = 0;
 
         for (double x = lowerLimit; x < upperLimit; x += step) {

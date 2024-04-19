@@ -17,13 +17,11 @@ struct Box {
 };
 
 std::ostream& operator<<(std::ostream& os, const Box& box) {
-    os << "Length: " << box.length << ", Width: " << box.width
-        << ", Height: " << box.height << ", Weight: " << box.weight
-        << ", Value: " << box.value;
+    os << "Length: " << box.length << ", Width: " << box.width << ", Height: " << box.height << ", Weight: " << box.weight << ", Value: " << box.value;
     return os;
 }
 
-std::istream& operator>>(std::istream& is, Box& box) {
+std::istream& operator >> (std::istream& is, Box& box) {
     is >> box.length >> box.width >> box.height >> box.weight >> box.value;
     return is;
 }

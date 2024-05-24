@@ -32,4 +32,4 @@ public:
 std::ostream& operator<<(std::ostream& os, const DynamicArray& arr);
 std::istream& operator>>(std::istream& is, DynamicArray& arr);
 
-#endif DYNAMIC_ARRAY_HPP
+#endif
